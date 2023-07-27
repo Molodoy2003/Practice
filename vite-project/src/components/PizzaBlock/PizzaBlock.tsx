@@ -1,13 +1,50 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { CartItem, addItem } from '../../redux/slices/cartSlice'
 
-const PizzaBlock = ({ title, price, image, sizes, types }) => {
+type PizzaBlockProps = {
+	id: string
+	title: string
+	price: number
+	imageUrl: string
+	sizes: number[]
+	types: number[]
+}
+
+const typeNames = ['тонкое', 'сырный борт']
+
+const PizzaBlock: React.FC<PizzaBlockProps> = ({
+	id,
+	title,
+	price,
+	imageUrl,
+	sizes,
+	types,
+}) => {
 	const [activeType, setActiveType] = useState(0)
 	const [activeSize, setActiveSize] = useState(0)
-	const typeNames = ['тонкое', 'традиционное']
+	const [count, setCount] = useState(0)
+	const dispatch = useDispatch()
+
+	const onClickAdd = () => {
+		const item: CartItem = {
+			id,
+			title,
+			price,
+			imageUrl,
+			type: typeNames[activeType],
+			size: activeSize,
+		}
+		dispatch(addItem(item))
+		setCount(count + 1)
+	}
 
 	return (
 		<div className='pizza-block'>
-			<img className='pizza-block__image' src={image} alt='Pizza' />
+			<Link to={`/pizza/${id}`}>
+				<img className='pizza-block__image' src={imageUrl} alt='Pizza' />
+			</Link>
 			<h4 className='pizza-block__title'>{title}</h4>
 			<div className='pizza-block__selector'>
 				<ul>
@@ -34,8 +71,11 @@ const PizzaBlock = ({ title, price, image, sizes, types }) => {
 				</ul>
 			</div>
 			<div className='pizza-block__bottom'>
-				<div className='pizza-block__price'>от {price} ₽</div>
-				<div className='button button--outline button--add'>
+				<div className='pizza-block__price'>от {price} р.</div>
+				<div
+					className='button button--outline button--add'
+					onClick={onClickAdd}
+				>
 					<svg
 						width='12'
 						height='12'
@@ -44,7 +84,7 @@ const PizzaBlock = ({ title, price, image, sizes, types }) => {
 						xmlns='http://www.w3.org/2000/svg'
 					></svg>
 					<span>Добавить</span>
-					<i>0</i>
+					<i>{count}</i>
 				</div>
 			</div>
 		</div>

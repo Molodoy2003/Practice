@@ -27,7 +27,7 @@ body {
   &__items {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
 
   &__top {
@@ -50,10 +50,20 @@ body {
   }
 }
 
+
+
+
+
+
+
+
+
+//////////////////////////////////////////
+
 .cart {
   &__top {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
   }
 
@@ -79,19 +89,12 @@ body {
     display: flex;
     align-items: center;
     cursor: pointer;
-    @include noselect();
 
     span {
       display: inline-block;
       margin-left: 7px;
       color: #b6b6b6;
       font-size: 18px;
-    }
-
-    span,
-    svg,
-    path {
-      transition: all $duration ease-in-out;
     }
 
     &:hover {
@@ -108,17 +111,14 @@ body {
 
   &__item {
     display: flex;
+    justify-content: center;
     width: 100%;
     border-top: 1px solid $gray-line;
-    padding-top: 30px;
     margin-top: 30px;
-
     &-img {
       display: flex;
       align-items: center;
-      margin-right: 15px;
-      width: 10%;
-
+      width: 8%;
       img {
         width: 80px;
         height: 80px;
@@ -129,7 +129,7 @@ body {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      width: 40%;
+      width: 30%;
 
       h3 {
         font-weight: bold;
@@ -167,7 +167,8 @@ body {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 33%;
+      width: 15%;
+      margin-left: 40px;
 
       b {
         font-weight: bold;
@@ -214,7 +215,7 @@ body {
 
     &-details {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
 
       span {
         font-size: 22px;
@@ -229,7 +230,7 @@ body {
 
     &-buttons {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       margin-top: 40px;
 
       .go-back-btn {
@@ -309,4 +310,8 @@ body {
       font-size: 18px;
     }
   }
+}
+
+.content__items {
+  margin-bottom: 100px;
 }

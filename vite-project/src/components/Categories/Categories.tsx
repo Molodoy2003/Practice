@@ -1,14 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
 
+type CategoriesProps = {
+	categoryId: number
+	onChangeCategory: (index: number) => void
+}
 
-const Categories = ({categotyId, onChangeCategory}) => {
+const Categories: React.FC<CategoriesProps> = ({
+	categoryId,
+	onChangeCategory,
+}) => {
 	const categories = [
 		'Все',
 		'Мясные',
 		'Вегетарианская',
 		'Гриль',
 		'Острые',
-		'Закрытые'
+		'Закрытые',
 	]
 
 	return (
@@ -18,7 +25,7 @@ const Categories = ({categotyId, onChangeCategory}) => {
 					<li
 						key={index}
 						onClick={() => onChangeCategory(index)}
-						className={categotyId === index ? 'active' : ''}
+						className={categoryId === index ? 'active' : ''}
 					>
 						{item}
 					</li>
